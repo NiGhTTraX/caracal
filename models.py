@@ -29,6 +29,9 @@ class Module(object):
   def __str__(self):
     return self._name
 
+  def __lt__(self, other):
+    return self._period < other.period
+
 
 class ModuleWithAmmo(Module):
   def __init__(self, name, discharge, period, capacity, reloadTime):
