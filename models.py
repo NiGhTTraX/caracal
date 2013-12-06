@@ -1,29 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
 
-class ModuleBase(metaclass=ABCMeta):
-  @property
-  @abstractmethod
-  def discharge(self):
-    ...
-
-  @discharge.setter
-  @abstractmethod
-  def discharge(self, value):
-    ...
-
-  @property
-  @abstractmethod
-  def period(self):
-    ...
-
-  @period.setter
-  @abstractmethod
-  def period(self, value):
-    ...
-
-
-class Module(ModuleBase):
+class Module(object):
   def __init__(self, name, discharge, period):
     self._name = name
     self._discharge = discharge
@@ -52,18 +30,13 @@ class Module(ModuleBase):
     return self._name
 
 
-class ModuleWithAmmo(ModuleBase):
+class ModuleWithAmmo(Module):
   def __init__(self, name, discharge, period, capacity, reloadTime):
-    self._name = name
-    self._discharge = discharge
-    self._period = period
+    super().__init__(name, discharge, period)
 
     self._capacity = capacity
     self._remaining = capacity
     self._reload = reloadTime
-
-  def hasAmmo(self):
-    return True
 
   @property
   def discharge(self):
@@ -71,10 +44,6 @@ class ModuleWithAmmo(ModuleBase):
     self._remaining -= 1
 
     return self._discharge
-
-  @discharge.setter
-  def discharge(self, value):
-    self._discharge = value
 
   @property
   def period(self):
@@ -85,12 +54,8 @@ class ModuleWithAmmo(ModuleBase):
 
     return self._period
 
-  @period.setter
-  def period(self, value):
-    self._period = value
-
-  def __str__(self):
-    return self._name
+  def hasAmmo(self):
+    return True
 
 
 class CapModelBase(metaclass=ABCMeta):
