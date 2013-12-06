@@ -90,7 +90,6 @@ class Caracal(object):
         period = lcm(period, p)
 
         # All modules will activate at the beginning.
-        logger.debug("Module '%s' %d %d", module, p, module.discharge)
         heapq.heappush(self._activations, (0, module))
 
     logger.debug("Common period is %d", period)
