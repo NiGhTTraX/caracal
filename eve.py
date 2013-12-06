@@ -66,7 +66,7 @@ class CapModelLinear(CapModelBase):
     super().__init__(cap, recharge)
 
   def recharge(self, delta):
-    self.current += self._cap / self._recharge
+    self.current += self._cap / self._recharge * delta
 
 
 cfunc = lambda T, C, t: C * (1 - 1 / (np.cosh(5/T * t)))
