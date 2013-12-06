@@ -44,7 +44,7 @@ class CapModelInverse(CapModelBase):
 
 class CapModelRecharge(CapModelBase):
   """Recharge cap by solving for t in capacitor over time equation and then
-  adding the integral of the recharve over time equation from t to t + delta."""
+  adding the integral of the recharge over time equation from t to t + delta."""
   def __init__(self, cap, recharge):
     super().__init__(cap, recharge)
 
