@@ -135,7 +135,7 @@ class Caracal(object):
           # Do we have more cap than last time?
           if cap > lastCap or abs(cap - lastCap) < eps:
             # We're stable!
-            return (True, cap, lastCap)
+            return (True, cap)
 
           # We're currently not stable, may need to do more cycles.
           cycle += self._common
