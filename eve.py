@@ -1,4 +1,6 @@
-from models import CapModelBase
+"""Capacitor models for EVE Online."""
+
+from models import BatteryModelBase
 
 from math import sqrt
 import numpy as np
@@ -11,7 +13,7 @@ sech = lambda x: 2 / (np.exp(x) + np.exp(-x))
 arcsech = lambda x: np.arccosh(1 / x)
 
 
-class CapModel(CapModelBase):
+class CapModel(BatteryModelBase):
   """Recharge cap using DustPuppy's original equation."""
   def __init__(self, cap, recharge):
     super().__init__(cap, recharge)
@@ -24,7 +26,7 @@ class CapModel(CapModelBase):
     self._currentCap = C * (1 + (sqrt(c / C) - 1) * np.exp(-delta / tau))**2
 
 
-class CapModelInverse(CapModelBase):
+class CapModelInverse(BatteryModelBase):
   """Recharge cap by solving for t in capacitor over time equation and then
   solving the same equation for cap substituting t with t + delta."""
   def __init__(self, cap, recharge):
@@ -41,7 +43,7 @@ class CapModelInverse(CapModelBase):
     self.current = C * (1 - 1 / (np.cosh(tau * (t + delta))))
 
 
-class CapModelRecharge(CapModelBase):
+class CapModelRecharge(BatteryModelBase):
   """Recharge cap by solving for t in capacitor over time equation and then
   adding the integral of the recharge over time equation from t to t + delta."""
   def __init__(self, cap, recharge):
@@ -59,7 +61,7 @@ class CapModelRecharge(CapModelBase):
     self.current += rfunc(tau, C, t + delta) - rfunc(tau, C, t)
 
 
-class CapModelLinear(CapModelBase):
+class CapModelLinear(BatteryModelBase):
   """Linear recharge model."""
   def __init__(self, cap, recharge):
     super().__init__(cap, recharge)

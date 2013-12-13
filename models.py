@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
 
-class Module(object):
+class Drainer(object):
   def __init__(self, name, discharge, period):
     self._name = name
     self._discharge = discharge
@@ -33,7 +33,7 @@ class Module(object):
     return self._period < other.period
 
 
-class ModuleWithAmmo(Module):
+class DrainerWithAmmo(Drainer):
   def __init__(self, name, discharge, period, capacity, reloadTime):
     super().__init__(name, discharge, period)
 
@@ -61,7 +61,7 @@ class ModuleWithAmmo(Module):
     return True
 
 
-class CapModelBase(metaclass=ABCMeta):
+class BatteryModelBase(metaclass=ABCMeta):
   def __init__(self, capacity, rechargeTime):
     self._cap = capacity
     self._currentCap = capacity

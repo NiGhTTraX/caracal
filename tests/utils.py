@@ -1,7 +1,7 @@
-from caracal.models import Module, CapModelBase
+from caracal.models import Drainer, BatteryModelBase
 
 
-class TestCapModelNoRecharge(CapModelBase):
+class TestBatteryModelNoRecharge(BatteryModelBase):
   def __init__(self, cap, recharge):
     super().__init__(cap, recharge)
 
@@ -9,7 +9,7 @@ class TestCapModelNoRecharge(CapModelBase):
     pass
 
 
-class TestCapModelLinear(CapModelBase):
+class TestBatteryModelLinear(BatteryModelBase):
   def __init__(self, cap, recharge):
     super().__init__(cap, recharge)
 
@@ -17,7 +17,7 @@ class TestCapModelLinear(CapModelBase):
     self.current += self.capacity / self.rechargeTime * delta
 
 
-class TestModule(Module):
+class TestDrainer(Drainer):
   def __init__(self, name, discharge, period, activations):
     super().__init__(name, discharge, period)
     self._activations = activations
